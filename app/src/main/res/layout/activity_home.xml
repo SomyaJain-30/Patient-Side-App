@@ -7,82 +7,86 @@
     android:orientation="vertical"
     tools:context=".Home">
 
-        <FrameLayout
+    <FrameLayout
 
-            android:id="@+id/framelayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            android:layout_weight="10"
-            >
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
-        </FrameLayout>
+    </FrameLayout>
 
 
-        <LinearLayout
-            android:id="@+id/linearLayout4"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="#E0F9FF"
-            android:gravity="bottom"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            >
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearLayout4"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:background="#E0F9FF"-->
+<!--        android:gravity="bottom"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="1.0">-->
 
-            <ImageButton
-                android:id="@+id/home_imagebutton"
-                android:layout_width="102dp"
-                android:layout_height="match_parent"
-                android:background="#69B9DB"
-                android:paddingTop="13dp"
-                android:paddingBottom="15dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/home">
+<!--        <ImageButton-->
+<!--            android:id="@+id/home_imagebutton"-->
+<!--            android:layout_width="102dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="#69B9DB"-->
+<!--            android:paddingTop="13dp"-->
+<!--            android:paddingBottom="15dp"-->
+<!--            android:scaleType="centerInside"-->
+<!--            android:src="@drawable/home">-->
 
-            </ImageButton>
+<!--        </ImageButton>-->
 
-            <ImageButton
-                android:id="@+id/calendar_imagebutton"
-                android:layout_width="102dp"
-                android:layout_height="match_parent"
-                android:background="#69B9DB"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/calendar">
+<!--        <ImageButton-->
+<!--            android:id="@+id/calendar_imagebutton"-->
+<!--            android:layout_width="102dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="#69B9DB"-->
+<!--            android:paddingTop="12dp"-->
+<!--            android:paddingBottom="12dp"-->
+<!--            android:scaleType="centerInside"-->
+<!--            android:src="@drawable/calendar">-->
 
-            </ImageButton>
+<!--        </ImageButton>-->
 
-            <ImageButton
-                android:id="@+id/clock_imagebutton"
-                android:layout_width="102dp"
-                android:layout_height="match_parent"
-                android:background="#69B9DB"
-                android:paddingTop="14dp"
-                android:paddingBottom="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/clock">
+<!--        <ImageButton-->
+<!--            android:id="@+id/clock_imagebutton"-->
+<!--            android:layout_width="102dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="#69B9DB"-->
+<!--            android:paddingTop="14dp"-->
+<!--            android:paddingBottom="12dp"-->
+<!--            android:scaleType="centerInside"-->
+<!--            android:src="@drawable/clock">-->
 
-            </ImageButton>
+<!--        </ImageButton>-->
 
-            <ImageButton
-                android:id="@+id/profile_imagebutton"
-                android:layout_width="102dp"
-                android:layout_height="match_parent"
-                android:background="#69B9DB"
-                android:paddingTop="8dp"
-                android:paddingBottom="16dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/profile">
+<!--        <ImageButton-->
+<!--            android:id="@+id/profile_imagebutton"-->
+<!--            android:layout_width="102dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="#69B9DB"-->
+<!--            android:paddingTop="8dp"-->
+<!--            android:paddingBottom="16dp"-->
+<!--            android:scaleType="centerInside"-->
+<!--            android:src="@drawable/profile">-->
 
-            </ImageButton>
-        </LinearLayout>
+<!--        </ImageButton>-->
+<!--    </LinearLayout>-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E0F9FF"
+        app:menu="@menu/navigation_items" />
 </LinearLayout>
