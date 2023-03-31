@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Home">
+
+        <FrameLayout
+
+            android:id="@+id/framelayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            android:layout_weight="10"
+            >
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#E0F9FF"
+            android:gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            >
+
+            <ImageButton
+                android:id="@+id/home_imagebutton"
+                android:layout_width="102dp"
+                android:layout_height="match_parent"
+                android:background="#69B9DB"
+                android:paddingTop="13dp"
+                android:paddingBottom="15dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/home">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/calendar_imagebutton"
+                android:layout_width="102dp"
+                android:layout_height="match_parent"
+                android:background="#69B9DB"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/calendar">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/clock_imagebutton"
+                android:layout_width="102dp"
+                android:layout_height="match_parent"
+                android:background="#69B9DB"
+                android:paddingTop="14dp"
+                android:paddingBottom="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/clock">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/profile_imagebutton"
+                android:layout_width="102dp"
+                android:layout_height="match_parent"
+                android:background="#69B9DB"
+                android:paddingTop="8dp"
+                android:paddingBottom="16dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/profile">
+
+            </ImageButton>
+        </LinearLayout>
+</LinearLayout>
