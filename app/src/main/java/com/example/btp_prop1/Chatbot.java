@@ -7,8 +7,10 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -105,29 +107,27 @@ public class Chatbot extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.RECORD_AUDIO}, 1);
             }
         }
-        else
-        {
-            rec.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                        // Start recording when the button is pressed
-                        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-                        Toast.makeText(Chatbot.this, "Speak", Toast.LENGTH_SHORT).show();
-                        speechRecognizer.startListening(intent);
-                        return true;
-                    } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                        // Stop recording when the button is released
-                        Toast.makeText(Chatbot.this, "Stop", Toast.LENGTH_SHORT).show();
-                        speechRecognizer.stopListening();
-                        return true;
-                    }
-                    return false;
+
+        rec.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    // Start recording when the button is pressed
+                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+                    Toast.makeText(Chatbot.this, "Speak", Toast.LENGTH_SHORT).show();
+                    speechRecognizer.startListening(intent);
+                    return true;
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    // Stop recording when the button is released
+                    Toast.makeText(Chatbot.this, "Stop", Toast.LENGTH_SHORT).show();
+                    speechRecognizer.stopListening();
+                    return true;
                 }
-            });
-        }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -135,9 +135,14 @@ public class Chatbot extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission given", Toast.LENGTH_SHORT).show();
                 return;
             } else {
-                // Permission denied, show a message or disable speech recognition functionality
+                Toast.makeText(this, "Permission is required", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivityForResult(intent, 1);
             }
         }
     }

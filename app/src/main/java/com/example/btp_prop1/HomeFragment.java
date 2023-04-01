@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -42,6 +43,7 @@ public class HomeFragment extends Fragment {
     TextView loc;
     ImageView RedirectTochatbot;
     ProgressBar mprogressbar;
+    CardView bookapp;
     boolean val = false;
 
     Geocoder geocoder;
@@ -54,12 +56,13 @@ public class HomeFragment extends Fragment {
         loc = v.findViewById(R.id.loc);
         RedirectTochatbot = v.findViewById(R.id.redirectTochatbot);
         mprogressbar = v.findViewById(R.id.progressBarforLocation);
+        bookapp = v.findViewById(R.id.cardView);
         loc.setText("Location");
         //cityName = new StringBuilder();
         locationManager = (LocationManager) requireContext().getSystemService(Context.LOCATION_SERVICE);
         startLocationUpdates();
 
-        RedirectTochatbot.setOnClickListener(new View.OnClickListener() {
+        bookapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), Chatbot.class);
@@ -94,7 +97,7 @@ public class HomeFragment extends Fragment {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission is granted, start receiving location updates
                 val = true;
-                Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
             } else {
                 // Permission is denied, handle accordingly
                 Toast.makeText(getActivity(), "Location access is required", Toast.LENGTH_LONG).show();
@@ -102,14 +105,14 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         } else {
-            Toast.makeText(getContext(), "Location not allowed", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Location not allowed", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void startLocationUpdates() {
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getActivity(), "1", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "1", Toast.LENGTH_SHORT).show();
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_LOCATION_PERMISSION);
         }
 
@@ -121,7 +124,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        Toast.makeText(getActivity(), "In stop", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "In stop", Toast.LENGTH_SHORT).show();
         if(val)
             locationManager.removeUpdates(locationListener);
         val = false;
@@ -130,10 +133,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Toast.makeText(getActivity(), "In Resume", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "In Resume", Toast.LENGTH_SHORT).show();
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){// && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getActivity(), "In Resume location", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "In Resume location", Toast.LENGTH_SHORT).show();
             mprogressbar.setVisibility(View.VISIBLE);
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
             //Toast.makeText(getContext(), getCityName(), Toast.LENGTH_SHORT).show();
