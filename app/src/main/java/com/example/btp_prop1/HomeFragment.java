@@ -1,20 +1,143 @@
 package com.example.btp_prop1;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 
 public class HomeFragment extends Fragment {
 
+    private static final int REQUEST_CODE_LOCATION_PERMISSION = 123;
+    LocationManager locationManager;
+    TextView loc;
+    ImageView RedirectTochatbot;
+    ProgressBar mprogressbar;
+    boolean val = false;
+
+    Geocoder geocoder;
+    //StringBuilder cityName;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        geocoder = new Geocoder(getContext(), Locale.getDefault());
+        loc = v.findViewById(R.id.loc);
+        RedirectTochatbot = v.findViewById(R.id.redirectTochatbot);
+        mprogressbar = v.findViewById(R.id.progressBarforLocation);
+        loc.setText("Location");
+        //cityName = new StringBuilder();
+        locationManager = (LocationManager) requireContext().getSystemService(Context.LOCATION_SERVICE);
+        startLocationUpdates();
+
+        RedirectTochatbot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Chatbot.class);
+                startActivity(intent);
+            }
+        });
+        return v;
+    }
+
+    LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(@NonNull Location location) {
+            String cityName = "Location";
+            try {
+                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                if (addresses.size() > 0) {
+                    cityName=(addresses.get(0).getSubAdminArea());
+                    //System.out.println(cityName.toString() + "****************************************");
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            loc.setText(cityName.toString());
+            mprogressbar.setVisibility(View.INVISIBLE);
+        }
+    };
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_CODE_LOCATION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission is granted, start receiving location updates
+                val = true;
+                Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+            } else {
+                // Permission is denied, handle accordingly
+                Toast.makeText(getActivity(), "Location access is required", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        } else {
+            Toast.makeText(getContext(), "Location not allowed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void startLocationUpdates() {
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getActivity(), "1", Toast.LENGTH_SHORT).show();
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_LOCATION_PERMISSION);
+        }
+
+//        if (val)
+//            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Toast.makeText(getActivity(), "In stop", Toast.LENGTH_SHORT).show();
+        if(val)
+            locationManager.removeUpdates(locationListener);
+        val = false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(getActivity(), "In Resume", Toast.LENGTH_SHORT).show();
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){// && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getActivity(), "In Resume location", Toast.LENGTH_SHORT).show();
+            mprogressbar.setVisibility(View.VISIBLE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            //Toast.makeText(getContext(), getCityName(), Toast.LENGTH_SHORT).show();
+        }
+        //System.out.println(cityName.toString() + "****************************************");
     }
 }
