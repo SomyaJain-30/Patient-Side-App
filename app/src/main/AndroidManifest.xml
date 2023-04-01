@@ -21,6 +21,13 @@
         android:theme="@style/Theme.Btp_prop1"
         tools:targetApi="31">
         <activity
+            android:name=".doctor_detail"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Chatbot"
             android:exported="false" />
         <activity
@@ -52,7 +59,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
