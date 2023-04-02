@@ -30,6 +30,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +56,9 @@ public class HomeFragment extends Fragment {
 
     Geocoder geocoder;
     //StringBuilder cityName;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore firebaseFirestore;
+    DocumentReference documentReference;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,9 +68,14 @@ public class HomeFragment extends Fragment {
         RedirectTochatbot = v.findViewById(R.id.redirectTochatbot);
         mprogressbar = v.findViewById(R.id.progressBarforLocation);
         bookapp = v.findViewById(R.id.cardView);
-        loc.setText("Location");
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        documentReference = firebaseFirestore.collection("Users").document(firebaseAuth.getUid());
+
         //cityName = new StringBuilder();
         locationManager = (LocationManager) requireContext().getSystemService(Context.LOCATION_SERVICE);
+
+
         startLocationUpdates();
 
         bookapp.setOnClickListener(new View.OnClickListener() {
@@ -81,12 +97,12 @@ public class HomeFragment extends Fragment {
                 if (addresses.size() > 0) {
                     cityName=(addresses.get(0).getSubAdminArea());
                     //System.out.println(cityName.toString() + "****************************************");
-
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
             loc.setText(cityName.toString());
+            documentReference.update("Location", cityName);
             mprogressbar.setVisibility(View.INVISIBLE);
         }
     };
@@ -97,6 +113,7 @@ public class HomeFragment extends Fragment {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission is granted, start receiving location updates
                 val = true;
+                //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
                 //Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
             } else {
                 // Permission is denied, handle accordingly
@@ -104,20 +121,49 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
             }
-        } else {
-            //Toast.makeText(getContext(), "Location not allowed", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void startLocationUpdates() {
+
+        getLocation();
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             //Toast.makeText(getActivity(), "1", Toast.LENGTH_SHORT).show();
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_LOCATION_PERMISSION);
         }
 
+
 //        if (val)
 //            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+    }
+
+    public void getLocation()
+    {
+        mprogressbar.setVisibility(View.VISIBLE);
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override //
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Object value = document.get("Location");
+                        loc.setText(value.toString());
+                        if (loc.getText().equals("Location") && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){// && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            //Toast.makeText(getActivity(), "In Resume location", Toast.LENGTH_SHORT).show();
+                            mprogressbar.setVisibility(View.VISIBLE);
+                            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+                            //Toast.makeText(getContext(), getCityName(), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+
+                    }
+                } else {
+                    System.out.println("Error getting Location");
+                }
+            }
+        });
+        mprogressbar.setVisibility(View.INVISIBLE);
     }
 
 
@@ -125,22 +171,15 @@ public class HomeFragment extends Fragment {
     public void onStop() {
         super.onStop();
         //Toast.makeText(getActivity(), "In stop", Toast.LENGTH_SHORT).show();
-        if(val)
-            locationManager.removeUpdates(locationListener);
-        val = false;
+        locationManager.removeUpdates(locationListener);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         //Toast.makeText(getActivity(), "In Resume", Toast.LENGTH_SHORT).show();
-
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){// && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            //Toast.makeText(getActivity(), "In Resume location", Toast.LENGTH_SHORT).show();
-            mprogressbar.setVisibility(View.VISIBLE);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-            //Toast.makeText(getContext(), getCityName(), Toast.LENGTH_SHORT).show();
-        }
+        getLocation();
+        locationManager.removeUpdates(locationListener);
         //System.out.println(cityName.toString() + "****************************************");
     }
 }
