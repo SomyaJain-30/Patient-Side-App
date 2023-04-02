@@ -11,7 +11,7 @@
     <item
         android:id="@+id/navigation_clock"
         android:icon="@drawable/clock"
-        android:title="User History" />
+        android:title="Your Journey" />
 
     <item
         android:id="@+id/navigation_profiles"
