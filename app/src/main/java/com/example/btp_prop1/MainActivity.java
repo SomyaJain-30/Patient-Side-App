@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
     EditText enternumber;
     Button getotpbutton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +39,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!enternumber.getText().toString().trim().isEmpty()){
                     if((enternumber.getText().toString().trim()).length()==10){
-
                         progressBar.setVisibility(View.VISIBLE);
                         getotpbutton.setVisibility(View.INVISIBLE);
-
                         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                                 "+91" + enternumber.getText().toString(),
                                 60, TimeUnit.SECONDS,
