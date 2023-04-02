@@ -9,9 +9,10 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="64dp"
-        android:layout_height="63dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Hi,"
+        android:layout_marginStart="1dp"
         android:textAlignment="viewStart"
         android:textColor="#214B7C"
         android:textSize="36dp"
@@ -29,14 +30,15 @@
         android:layout_height="wrap_content"
         android:text="Welcome to our app!"
         android:textColor="#214B7C"
+        android:layout_marginStart="1dp"
         android:textSize="26dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.213"
+        app:layout_constraintHorizontal_bias="0.225"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.112" />
+        app:layout_constraintVertical_bias="0.091" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -45,6 +47,7 @@
         android:layout_marginHorizontal="30dp"
         android:background="#69B9DB"
         android:orientation="vertical"
+        android:paddingHorizontal="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,11 +67,10 @@
 
         <EditText
             android:id="@+id/name"
-            android:layout_width="310dp"
+            android:layout_width="300dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="20dp"
             android:textColorHint="#555353"
-            android:layout_marginRight="20dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
             android:textColor="@color/black"
             android:background="@color/white"
@@ -89,10 +91,9 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_width="310dp"
+            android:layout_width="300dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
             android:background="@color/white">
             <EditText
@@ -131,7 +132,7 @@
 
         <EditText
             android:id="@+id/email"
-            android:layout_width="310dp"
+            android:layout_width="300dp"
             android:layout_height="45dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"

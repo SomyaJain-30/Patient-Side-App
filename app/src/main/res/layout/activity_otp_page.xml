@@ -4,39 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Otp_page"
-    android:background="#E0F9FF">
+    android:background="#E0F9FF"
+    tools:context=".Otp_page">
 
-    <TextView
-        android:id="@+id/textview4"
-        android:layout_width="353dp"
-        android:layout_height="59dp"
-        android:text="Enter the 6-digts OTP sent to your mobile number"
-        android:textColor="@color/black"
-        android:textSize="22dp"
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintVertical_bias="0.057">
+
+
+        <TextView
+            android:id="@+id/textview4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter the 6-digts OTP sent to your mobile number"
+            android:textColor="@color/black"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.448"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.08" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="34dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.222"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview4"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.166">
 
         <EditText
 
@@ -50,8 +62,7 @@
             android:maxLength="1"
             android:textAlignment="center"
             android:textSize="24sp"
-            android:textStyle="bold"
-            >
+            android:textStyle="bold">
 
         </EditText>
 
@@ -66,8 +77,7 @@
             android:maxLength="1"
             android:textAlignment="center"
             android:textSize="24sp"
-            android:textStyle="bold"
-            >
+            android:textStyle="bold">
 
         </EditText>
 
@@ -82,8 +92,7 @@
             android:maxLength="1"
             android:textAlignment="center"
             android:textSize="24sp"
-            android:textStyle="bold"
-            >
+            android:textStyle="bold">
 
         </EditText>
 
@@ -98,8 +107,7 @@
             android:maxLength="1"
             android:textAlignment="center"
             android:textSize="24sp"
-            android:textStyle="bold"
-            >
+            android:textStyle="bold">
 
         </EditText>
 
@@ -115,8 +123,7 @@
 
             android:textAlignment="center"
             android:textSize="24sp"
-            android:textStyle="bold"
-            >
+            android:textStyle="bold">
 
         </EditText>
 
@@ -131,27 +138,25 @@
             android:maxLength="1"
             android:textAlignment="center"
             android:textSize="24sp"
-            android:textStyle="bold"
-            >
+            android:textStyle="bold">
 
         </EditText>
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="190dp"
         android:layout_height="30dp"
         android:layout_weight="2"
-        android:textColor="#919191"
         android:text="Didn't Recieve the code?"
+        android:textColor="#919191"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.348"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <TextView
         android:id="@+id/resend"
@@ -169,12 +174,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.009" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
         android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -185,13 +191,13 @@
 
         <Button
             android:id="@+id/otpbutton"
-            android:layout_width="347dp"
-            android:layout_height="58dp"
-            android:layout_marginHorizontal="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:background="#407CD6"
             android:text="Verify"
-            android:textSize="17dp"
             android:textColor="@color/white"
+            android:textSize="17dp"
             app:cornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
