@@ -1,7 +1,6 @@
 package com.example.btp_prop1;
 
-public class contactModel
-{
+public class contactModel {
     int image;
     String name, speciality;
 

@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/drawable/search_view_background.xml" value="0.146" />
         <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/activity_home.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/activity_otp_page.xml" value="0.25" />
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/activity_recommended_doctors.xml" value="0.25" />
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/doctor_list_card.xml" value="0.25" />
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/fragment_clock.xml" value="0.25" />
         <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/fragment_home.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
       </map>

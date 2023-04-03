@@ -9,11 +9,14 @@
     android:orientation="vertical">
 
     <SearchView
+        android:id="@+id/search_view_fragment_clock"
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="20dp"
         android:iconifiedByDefault="false"
         android:queryHint="Search Here"
+        android:textColor="@color/black"
+        android:textColorHint="#636161"
         android:background="@drawable/search_view_background"
         android:layout_height="wrap_content">
 
