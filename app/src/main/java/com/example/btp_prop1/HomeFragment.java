@@ -105,6 +105,12 @@ public class HomeFragment extends Fragment {
             documentReference.update("Location", cityName);
             mprogressbar.setVisibility(View.INVISIBLE);
         }
+
+        @Override
+        public void onProviderDisabled(@NonNull String provider) {
+            //LocationListener.super.onProviderDisabled(provider);
+            mprogressbar.setVisibility(View.INVISIBLE);
+        }
     };
 
     @Override
