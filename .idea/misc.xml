@@ -3,14 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/drawable/add_photo_image.xml" value="0.146" />
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/drawable/ic_baseline_calendar_month_24.xml" value="0.146" />
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/drawable/ic_baseline_photo_camera_24.xml" value="0.146" />
         <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/drawable/search_view_background.xml" value="0.146" />
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/activity_edit_profile_user.xml" value="0.25" />
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/activity_form.xml" value="0.25" />
         <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/activity_home.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/activity_otp_page.xml" value="0.25" />
         <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/activity_recommended_doctors.xml" value="0.25" />
         <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/doctor_list_card.xml" value="0.25" />
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/fragment_calender.xml" value="0.25" />
         <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/fragment_clock.xml" value="0.25" />
         <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/fragment_home.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Users/somya/AndroidStudioProjects/btp/app/src/main/res/menu/navigation_items.xml" value="0.25" />
       </map>
     </option>
   </component>

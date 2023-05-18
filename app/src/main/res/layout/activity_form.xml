@@ -43,7 +43,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="350dp"
-        android:layout_height="437dp"
+        android:layout_height="520dp"
         android:layout_marginHorizontal="30dp"
         android:background="#69B9DB"
         android:orientation="vertical"
@@ -120,12 +120,50 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="Your Profession:"
+            android:textColor="#214B7C"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/white">
+            <EditText
+                android:id="@+id/profession"
+                android:layout_width="250dp"
+                android:layout_height="45dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:textColorHint="#555353"
+                android:background="@color/white"
+                android:ems="10"
+                android:hint="Profession"
+                android:paddingLeft="10dp" />
+
+               <!--<ImageButton
+                android:id="@+id/profession_picker"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_baseline_arrow_drop_down_24" /> -->
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="10dp"
-            android:text="E-mail Address:"
+            android:text="E-Mail Address:"
             android:textColor="#214B7C"
             android:textSize="20dp"
             android:textStyle="bold" />

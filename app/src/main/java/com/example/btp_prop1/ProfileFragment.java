@@ -1,5 +1,6 @@
 package com.example.btp_prop1;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,17 +20,21 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.Text;
+
 import java.util.Map;
 
 public class ProfileFragment extends Fragment {
 
     TextView mobileNumber ;
+    TextView profession;
     TextView gender;
     TextView height;
     TextView weight;
     TextView email;
     TextView dateOfBirth;
     TextView heroName;
+    Button editProfile;
 
 
     private FirebaseAuth firebaseAuth;
@@ -45,8 +51,10 @@ public class ProfileFragment extends Fragment {
         height = v.findViewById(R.id.height_fragment_profile);
         weight = v.findViewById(R.id.weight_fragment_profile);
         email = v.findViewById(R.id.email_fragment_profile);
+        profession = v.findViewById(R.id.profession_fragment_profile);
         dateOfBirth = v.findViewById(R.id.dob_fragment_profile);
         heroName = v.findViewById(R.id.hero_name);
+        editProfile = v.findViewById(R.id.edit_profile_fragment_profile);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -57,6 +65,7 @@ public class ProfileFragment extends Fragment {
                 if (documentSnapshot.exists()) {
                     Map<String, Object> data = documentSnapshot.getData();
                     gender.setText(data.get("Gender").toString());
+                    profession.setText(data.get("Profession").toString());
                     height.setText(data.get("Height").toString());
                     weight.setText(data.get("Weight").toString());
                     email.setText(data.get("Email").toString());
@@ -73,12 +82,26 @@ public class ProfileFragment extends Fragment {
                 weight.setText("NaN");
                 email.setText("NaN");
                 dateOfBirth.setText("NaN");
+                profession.setText("NaN");
                 mobileNumber.setText("NaN");
                 heroName.setText("NaN");
                 Toast.makeText(getContext(), "Error Fetching data, Try again!", Toast.LENGTH_SHORT).show();
             }
         });
-
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), EditProfileUser.class);
+                i.putExtra("name" , heroName.getText().toString());
+                i.putExtra("DOB" , dateOfBirth.getText().toString());
+                i.putExtra("Email", email.getText().toString());
+                i.putExtra("Gender" , gender.getText().toString());
+                i.putExtra("Height" , height.getText().toString());
+                i.putExtra("Weight" , weight.getText().toString());
+                i.putExtra("Profession" , profession.getText().toString());
+                startActivity(i);
+            }
+        });
 
         return v;
     }

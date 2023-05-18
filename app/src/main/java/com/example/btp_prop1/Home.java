@@ -109,15 +109,15 @@ public class Home extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission is granted, start receiving location updates
                 val = true;
-                Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
             } else {
                 // Permission is denied, handle accordingly
-                Toast.makeText(this, "Location access is required", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "Location access is required", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
             }
         } else {
-            Toast.makeText(this, "Location not allowed", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Location not allowed", Toast.LENGTH_SHORT).show();
         }
     }
 

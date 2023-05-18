@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class Form extends AppCompatActivity {
     Button formButton;
-    EditText name, email, dob;
+    EditText name, email, dob,profession;
     RadioGroup radioGroup;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
@@ -45,6 +45,7 @@ public class Form extends AppCompatActivity {
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         dob = findViewById(R.id.dob);
+        profession = findViewById(R.id.profession);
         date = findViewById(R.id.button_date_picker);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         final Calendar calendar = Calendar.getInstance();
@@ -59,8 +60,7 @@ public class Form extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(name.getText().toString().isEmpty() || email.getText().toString().isEmpty() || dob.getText().toString().isEmpty()
-                        || radioGroup.getCheckedRadioButtonId() == -1
-                )
+                       || profession.getText().toString().isEmpty() || radioGroup.getCheckedRadioButtonId() == -1)
                     Toast.makeText(Form.this, "Enter all the fields", Toast.LENGTH_SHORT).show();
                 else{
                     // make the function call
@@ -93,6 +93,7 @@ public class Form extends AppCompatActivity {
         userdata.put("uid", firebaseAuth.getUid());
         userdata.put("Name",name.getText().toString());
         userdata.put("DOB", dob.getText().toString());
+        userdata.put("Profession", profession.getText().toString());
         userdata.put("Email", email.getText().toString());
         userdata.put("Gender" , ((RadioButton)findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString());
         userdata.put("Height" , "NaN");
