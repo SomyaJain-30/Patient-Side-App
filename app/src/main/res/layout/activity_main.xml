@@ -79,15 +79,7 @@
                 android:visibility="gone"></ProgressBar>
         </FrameLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="230dp"
-            android:layout_marginBottom="20dp"
-            android:text="Doctor's Login?"
-            android:textColor="@color/drblue"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+
 
 
 
