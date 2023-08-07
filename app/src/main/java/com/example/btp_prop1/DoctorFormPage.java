@@ -28,6 +28,7 @@ public class DoctorFormPage extends AppCompatActivity {
     EditText doctorSpecialization;
     EditText doctorClinicAddress;
     EditText doctorEmail;
+    EditText doctorExprience;
     EditText doctorEducation;
     RadioGroup radioGroupDoctor;
     DocumentReference documentReference;
@@ -48,6 +49,7 @@ public class DoctorFormPage extends AppCompatActivity {
         doctorClinicAddress = (EditText) findViewById(R.id.doctor_clinic_address);
         doctorEmail = (EditText)findViewById(R.id.doctor_email_address);
         doctorEducation = (EditText) findViewById(R.id.doctor_education);
+        doctorExprience = (EditText) findViewById(R.id.doctor_exprience);
         radioGroupDoctor = (RadioGroup) findViewById(R.id.radiogroup_doctor);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -56,7 +58,7 @@ public class DoctorFormPage extends AppCompatActivity {
         doctorContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(doctorSpecialization.getText().toString().isEmpty() || doctorClinicAddress.getText().toString().isEmpty() || doctorEmail.getText().toString().isEmpty() || doctorEducation.getText().toString().isEmpty() || radioGroupDoctor.getCheckedRadioButtonId() == -1){
+                if(doctorSpecialization.getText().toString().isEmpty() || doctorClinicAddress.getText().toString().isEmpty() || doctorEmail.getText().toString().isEmpty() || doctorEducation.getText().toString().isEmpty() || doctorExprience.getText().toString().isEmpty() || radioGroupDoctor.getCheckedRadioButtonId() == -1){
                     Toast.makeText(DoctorFormPage.this, "Enter all the fields", Toast.LENGTH_SHORT).show();
                 }else{
                     senddatatofirestore();
@@ -83,6 +85,9 @@ public class DoctorFormPage extends AppCompatActivity {
         }
         if(!doctorEducation.getText().toString().isEmpty()){
             documentReference.update("Education" , doctorEducation.getText().toString());
+        }
+        if(!doctorExprience.getText().toString().isEmpty()){
+            documentReference.update("Exprience" , doctorExprience.getText().toString());
         }
         documentReference.update("Gender" , ((RadioButton)findViewById(radioGroupDoctor.getCheckedRadioButtonId())).getText().toString());
 

@@ -17,12 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
@@ -39,7 +43,8 @@ public class Otp_page extends AppCompatActivity {
     Button otpbutton;
     String getotpbackend;
     TextView resend;
-
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseFirestore;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +64,10 @@ public class Otp_page extends AppCompatActivity {
         getotpbackend = getIntent().getStringExtra("backendotp");
         final ProgressBar ProgressBarVerifyOtp = findViewById(R.id.verify_otp);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
-
+        String number = "+91" + getIntent().getStringExtra("mobile");
         otpbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,9 +97,8 @@ public class Otp_page extends AppCompatActivity {
                                         otpbutton.setVisibility(View.VISIBLE);
 
                                         if(task.isSuccessful()){
-                                            Intent intent = new Intent(getApplicationContext() , Form.class);
-                                            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK|intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            startActivity(intent);
+                                            checkIfNumberExists(number);
+
                                         }else{
                                             Toast.makeText(Otp_page.this, "Enter correct Otp", Toast.LENGTH_SHORT).show();
                                         }
@@ -109,11 +115,12 @@ public class Otp_page extends AppCompatActivity {
 
         numberotpmove();
         resend =(TextView) findViewById(R.id.resend);
+
         resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                        "+91" + getIntent().getStringExtra("mobile"),
+                PhoneAuthProvider.getInstance().verifyPhoneNumber(number
+                        ,
                         60, TimeUnit.SECONDS,
                         Otp_page.this,
                         new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -143,6 +150,36 @@ public class Otp_page extends AppCompatActivity {
 
 
 
+    }
+
+    private void checkIfNumberExists(String number) {
+        Toast.makeText(this, number, Toast.LENGTH_SHORT).show();
+        firebaseFirestore.collection("Patients").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                boolean flg = true;
+                for(DocumentSnapshot ds: queryDocumentSnapshots)
+                {
+                    if(ds.getId().equals(number))
+                    {
+                        flg = false;
+                       // System.out.println("+++++++++++++++++++++++++++++1" + number);
+                        Intent i = new Intent(Otp_page.this , Home.class);
+                        startActivity(i);
+                        break;
+                    }
+                }
+                if(flg == true){
+                    Intent intent = new Intent(getApplicationContext() , Form.class);
+                    intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK|intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+//                System.out.println("+++++++++++++++++++++++++++++2" + number);
+//                Intent intent = new Intent(getApplicationContext() , Form.class);
+//                intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK|intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(intent);
+            }
+        });
     }
 
     private void numberotpmove() {

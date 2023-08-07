@@ -22,22 +22,22 @@ public class WelcomeActivity extends AppCompatActivity {
         patientButton = (Button) findViewById(R.id.patient_button);
         doctorButton = (Button) findViewById(R.id.doctor_button);
 
-        patientButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(WelcomeActivity.this,MainActivity.class);
-                startActivity(i);
-            }
-        });
-
-        doctorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(WelcomeActivity.this,DoctorsLogin.class);
-                startActivity(i);
-
-            }
-        });
+//        patientButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(WelcomeActivity.this,MainActivity.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//        doctorButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(WelcomeActivity.this,DoctorsLogin.class);
+//                startActivity(i);
+//
+//            }
+//        });
 
     }
 }

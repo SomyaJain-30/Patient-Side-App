@@ -14,10 +14,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.w3c.dom.Text;
 
@@ -26,8 +30,9 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
     EditText enternumber;
     Button getotpbutton;
-    TextView doctorlogin;
-
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseFirestore;
+    ProgressBar progressBar;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         enternumber = (EditText) findViewById(R.id.mobilenumber);
         getotpbutton = (Button) findViewById(R.id.mainacitvitybutton);
 
-         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.sending_otp);
+       progressBar = (ProgressBar) findViewById(R.id.sending_otp);
 
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
         getotpbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,13 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onCodeSent(@NonNull String backendotp, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                                        progressBar.setVisibility(View.GONE);
-                                        getotpbutton.setVisibility(View.VISIBLE);
-                                        Intent intent = new Intent(getApplicationContext(), Otp_page.class);
-                                        intent.putExtra("mobile", enternumber.getText().toString());
-                                        intent.putExtra("backendotp" , backendotp);
-                                        Log.d("otp", backendotp);
-                                        startActivity(intent);
+
+                                        checkIfItIsDoctor("+91" + enternumber.getText().toString(), backendotp);
+
                                     }
                                 }
                         );
@@ -90,6 +93,31 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void checkIfItIsDoctor(String s, String backendotp) {
+        firebaseFirestore.collection("Doctors").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(DocumentSnapshot ds: queryDocumentSnapshots)
+                {
+                    if(ds.getId().equals(s))
+                    {
+                        Toast.makeText(MainActivity.this, "The number is registered as doctor.", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        getotpbutton.setVisibility(View.VISIBLE);
+                        return;
+                    }
+                }
+                progressBar.setVisibility(View.GONE);
+                getotpbutton.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(getApplicationContext(), Otp_page.class);
+                intent.putExtra("mobile", enternumber.getText().toString());
+                intent.putExtra("backendotp" , backendotp);
+                Log.d("otp", backendotp);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

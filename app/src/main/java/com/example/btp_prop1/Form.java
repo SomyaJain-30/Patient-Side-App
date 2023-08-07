@@ -88,9 +88,8 @@ public class Form extends AppCompatActivity {
     }
 
     private void sendDataToCloudFirestore() {
-        DocumentReference documentReference = firebaseFirestore.collection("Users").document(firebaseAuth.getUid());
+        DocumentReference documentReference = firebaseFirestore.collection("Patients").document(firebaseAuth.getCurrentUser().getPhoneNumber());
         Map<String, Object> userdata = new HashMap<>();
-        userdata.put("uid", firebaseAuth.getUid());
         userdata.put("Name",name.getText().toString());
         userdata.put("DOB", dob.getText().toString());
         userdata.put("Profession", profession.getText().toString());

@@ -152,6 +152,7 @@ public class DoctorsLogin extends AppCompatActivity {
         doctordata.put("Clinic Address", "clinic address");
         doctordata.put("E-mail address" , "email");
         doctordata.put("Education" , "Education");
+        doctordata.put("Exprience", "Exprience");
         doctordata.put("Gender" , "gender");
         documentReference.set(doctordata).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

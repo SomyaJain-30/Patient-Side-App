@@ -142,6 +142,7 @@
                 android:layout_height="45dp"
                 android:textColor="@color/black"
                 android:layout_marginRight="10dp"
+                android:inputType="text"
                 android:layout_marginBottom="20dp"
                 android:textColorHint="#555353"
                 android:background="@color/white"

@@ -97,7 +97,7 @@ public class EditProfileUser extends AppCompatActivity {
     }
 
     private void sendUserDataToFireStore() {
-        documentReference = firebaseFirestore.collection("Users").document(firebaseAuth.getUid());
+        documentReference = firebaseFirestore.collection("Patients").document(firebaseAuth.getCurrentUser().getPhoneNumber());
 
         if(!userName.getText().toString().isEmpty()){
             documentReference.update("Name", userName.getText().toString());

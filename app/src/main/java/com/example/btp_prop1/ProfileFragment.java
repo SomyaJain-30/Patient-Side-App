@@ -58,7 +58,7 @@ public class ProfileFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        DocumentReference documentReference =firebaseFirestore.collection("Users").document(firebaseAuth.getUid());
+        DocumentReference documentReference =firebaseFirestore.collection("Patients").document(firebaseAuth.getCurrentUser().getPhoneNumber());
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
