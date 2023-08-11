@@ -72,7 +72,7 @@ public class BookSlotFragment extends BottomSheetDialogFragment {
         rv.setAdapter(timeSlotsAdapter);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-
+        //comment
         Bundle args = getArguments();
         if (args != null) {
             Did = args.getString("Did");
