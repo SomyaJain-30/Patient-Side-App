@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class Appointments implements Parcelable {
-    private String Cid, Date, day, Did, Status, Timeslot, AppointmentId, DoctorName;
+    private String Cid, Date, day, Did, Status, Timeslot, AppointmentId, DoctorName, PatientName;
     public Appointments(){
 
     }
@@ -111,5 +111,13 @@ public class Appointments implements Parcelable {
 
     public void setDoctorName(String doctorName) {
         DoctorName = doctorName;
+    }
+
+    public String getPatientName() {
+        return PatientName;
+    }
+
+    public void setPatientName(String patientName) {
+        PatientName = patientName;
     }
 }

@@ -43,7 +43,7 @@ public class doctor_detail extends AppCompatActivity {
         String address1 = i.getStringExtra("Clinic Address");
         slots1 = (Map<String, List<String>>) i.getSerializableExtra("Slots");
 
-        name.setText("Dr. " + name1);
+        name.setText(name1);
         specialization.setText(specialization1);
         education.setText(education1);
         contact.setText(contact1);

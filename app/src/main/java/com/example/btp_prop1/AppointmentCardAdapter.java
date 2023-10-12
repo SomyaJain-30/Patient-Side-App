@@ -1,10 +1,14 @@
 package com.example.btp_prop1;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -123,9 +127,20 @@ public class AppointmentCardAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             firebaseFirestore.collection("Doctors").document(((Appointments)date_app.get(position)).getDid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    requestedCardViewHolder.doctorname.setText("Dr. " + documentSnapshot.get("Name").toString());
+                    ((Appointments)date_app.get(position)).setDoctorName(documentSnapshot.get("Name").toString());
+                    requestedCardViewHolder.doctorname.setText(((Appointments)date_app.get(position)).getDoctorName());
                     String str = convertTo12HourFormat(((Appointments)date_app.get(position)).getTimeslot());
                     requestedCardViewHolder.appointmentTiming.setText(str);
+                }
+            });
+
+            requestedCardViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(tab.equals("confirmed"))
+                    {
+                        makeVideoCallDialog(requestedCardViewHolder);
+                    }
                 }
             });
         }
@@ -134,6 +149,42 @@ public class AppointmentCardAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             viewHolder2 hold = (viewHolder2) holder;
             hold.tv.setText((String)date_app.get(position));
         }
+    }
+
+    public void makeVideoCallDialog(RequestedCardViewHolder holder)
+    {
+        LayoutInflater inflater = LayoutInflater.from(activity.getApplicationContext());
+        View dialogView = inflater.inflate(R.layout.call_dialog, null);
+
+        TextView name, dateDayTime;
+        name = dialogView.findViewById(R.id.accept_reject_doctorname);
+        dateDayTime = dialogView.findViewById(R.id.accept_reject_date);
+        Button call;
+        call = dialogView.findViewById(R.id.join_call);
+
+        name.setText(((Appointments)date_app.get(holder.getAdapterPosition())).getDoctorName());
+        String str =  ((Appointments)date_app.get(holder.getAdapterPosition())).getDate() + ", " +
+                ((Appointments)date_app.get(holder.getAdapterPosition())).getDay() + ", " +
+                convertTo12HourFormat(String.valueOf(((Appointments)date_app.get(holder.getAdapterPosition())).getTimeslot()));
+
+        dateDayTime.setText(str);
+
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity, R.style.RoundedCornerDialog);
+        dialogBuilder.setView(dialogView);
+        AlertDialog acceptRejectDialog = dialogBuilder.create();
+        acceptRejectDialog.show();
+
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(context, CallActivity.class);
+                in.putExtra("AId", ((Appointments)date_app.get(holder.getAdapterPosition())).getAppointmentId());
+                in.putExtra("PName", ((Appointments)date_app.get(holder.getAdapterPosition())).getPatientName());
+                context.startActivity(in);
+                acceptRejectDialog.dismiss();
+            }
+        });
     }
 
     private static String convertTo12HourFormat(String time) {

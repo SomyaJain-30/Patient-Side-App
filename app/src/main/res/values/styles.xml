@@ -3,4 +3,8 @@
     <style name="CustomBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:background">@drawable/fragment_background</item>
     </style>
+
+    <style name="RoundedCornerDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/accept_reject_background</item>
+    </style>
 </resources>

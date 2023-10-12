@@ -28,6 +28,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -141,10 +143,16 @@ public class BookSlotFragment extends BottomSheetDialogFragment {
             slotTaken = new ArrayList<>();
 
         List<String> uniqueSlots = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        String currentTimeString = dateFormat.format(Calendar.getInstance().getTime());
+        dateFormat = new SimpleDateFormat("dd/MM/yy");
+        String formattedDate = dateFormat.format(new Date());
 
         for (String slot : list1) {
+
             if (!slotTaken.contains(slot)) {
-                uniqueSlots.add(slot);
+                if(!formattedDate.equals(date) || (formattedDate.equals(date) && slot.compareTo(currentTimeString) > 0))
+                    uniqueSlots.add(slot);
             }
         }
 

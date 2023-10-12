@@ -74,7 +74,7 @@ public class CalenderFragment extends Fragment {
                                 appointments.setDid(d.get("Did").toString());
                                 appointments.setStatus(d.get("Status").toString());
                                 appointments.setTimeslot(d.get("TimeSlot").toString());
-
+                                appointments.setPatientName(documentSnapshot.get("Name").toString());
                                 String status = appointments.getStatus();
                                 switch (status){
                                     case "Requested":
