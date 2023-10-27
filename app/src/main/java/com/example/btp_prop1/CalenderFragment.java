@@ -1,5 +1,6 @@
 package com.example.btp_prop1;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class CalenderFragment extends Fragment {
     public List<Appointments> requested, confirmed, completed, rejected;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
+    ProgressDialog progressDialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class CalenderFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_calender, container, false);
         viewPager = v.findViewById(R.id.viewpager_calendar_fragment);
         tabLayout = v.findViewById(R.id.appointment_tabs);
-
+        progressDialog = new ProgressDialog(getContext());
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         requested = new ArrayList<Appointments>();
@@ -54,6 +56,7 @@ public class CalenderFragment extends Fragment {
     List<String> ids;
     MyPageAdapter adapter;
     private void fetchAppointments() {
+        showProgress();
         firebaseFirestore.collection("Patients").document(firebaseAuth.getCurrentUser().getPhoneNumber()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -100,8 +103,7 @@ public class CalenderFragment extends Fragment {
                         viewPager.setAdapter(adapter);
                         viewPager.setOffscreenPageLimit(4);
                         tabLayout.setupWithViewPager(viewPager);
-
-
+                        progressDialog.dismiss();
                     }
                 });
             }
@@ -158,6 +160,13 @@ public class CalenderFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
             return tabTitles[position];
         }
+    }
+
+    void showProgress()
+    {
+        progressDialog.setMessage("Loading..."); // Set the message you want to display
+        progressDialog.setCancelable(false); // Set whether the dialog can be canceled by tapping outside
+        progressDialog.show();
     }
 }
 

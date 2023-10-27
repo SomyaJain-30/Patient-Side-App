@@ -68,6 +68,7 @@ public class BookSlotFragment extends BottomSheetDialogFragment {
         sendRequest = v.findViewById(R.id.snd_req);
         dateSpinner = v.findViewById(R.id.choose_date);
         takenSlots = new HashMap<>();
+        slotsMap = new HashMap<>();
         timeSlotsAdapter = new TimeSlotsAdapter(getContext());
         populateSpinner();
         rv.setLayoutManager(new GridLayoutManager(getContext(),3));
@@ -79,6 +80,16 @@ public class BookSlotFragment extends BottomSheetDialogFragment {
         if (args != null) {
             Did = args.getString("Did");
         }
+
+//        firebaseFirestore.collection("Doctors").document(Did).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                slotsMap = (Map<String,List<String>>) documentSnapshot.get("Slots");
+//                if(slotsMap != null){
+//                    sendRequest.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        });
         firebaseFirestore.collection("Doctors").document(Did).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {

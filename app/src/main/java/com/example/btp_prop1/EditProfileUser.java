@@ -182,12 +182,15 @@ public class EditProfileUser extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_SELECT_IMAGE && resultCode == RESULT_OK && data != null) {
+
             Uri selectedImageUri = data.getData();
+            System.out.println(selectedImageUri);
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
             Cursor cursor = getContentResolver().query(selectedImageUri, filePathColumn, null, null, null);
             cursor.moveToFirst();
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String imagePath = cursor.getString(columnIndex);
+            System.out.println(imagePath);
             cursor.close();
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
             Glide.with(this).load(bitmap).apply(requestOptions).into(profilePhoto);

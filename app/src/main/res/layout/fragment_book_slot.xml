@@ -69,6 +69,7 @@
         android:padding="5dp"
         android:text="Send Request"
         android:textAlignment="center"
+        android:visibility="invisible"
         android:background="@drawable/send_request_background"
         android:textColor="@color/black"
         android:layout_marginHorizontal="130dp">

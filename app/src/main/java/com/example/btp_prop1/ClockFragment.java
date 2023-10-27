@@ -1,5 +1,6 @@
 package com.example.btp_prop1;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -95,6 +96,7 @@ public class ClockFragment extends Fragment {
             }
         });
 
+        dialogShow();
         firebaseFirestore.collection("Doctors").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -114,10 +116,27 @@ public class ClockFragment extends Fragment {
                // doctorList.add(new Doctor(R.drawable.doctor_image,"doctor A", "speciality 1"));
                 RecyclerDoctorListAdapter adapter = new RecyclerDoctorListAdapter(getContext(),doctorList);
                 recyclerView.setAdapter(adapter);
+                dismiss();
             }
         });
 
         return view;
 
     }
+
+    ProgressDialog progressDialog;
+    void dialogShow()
+    {
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false); // Prevent user from dismissing it by clicking outside
+        progressDialog.show();
+
+    }
+
+    void dismiss()
+    {
+        progressDialog.dismiss();
+    }
+
 }

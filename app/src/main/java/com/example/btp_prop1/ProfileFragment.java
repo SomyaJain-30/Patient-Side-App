@@ -52,7 +52,6 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,7 +72,9 @@ public class ProfileFragment extends Fragment {
 
         requestOptions = new RequestOptions();
         requestOptions = requestOptions.transforms(new CircleCrop());
+        progressDialog = new ProgressDialog(getContext());
 
+        dialogShow();
         DocumentReference documentReference =firebaseFirestore.collection("Patients").document(firebaseAuth.getCurrentUser().getPhoneNumber());
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -90,9 +91,11 @@ public class ProfileFragment extends Fragment {
                     if(data.containsKey("Profile URL"))
                     {
                         imgUri = Uri.parse(data.get("Profile URL").toString());
-                        Glide.with(getContext()).load(imgUri).apply(requestOptions).into(profile);
+                        if(getActivity()!=null)
+                            Glide.with(getActivity()).load(imgUri).apply(requestOptions).into(profile);
                     }
                     mobileNumber.setText(firebaseAuth.getCurrentUser().getPhoneNumber());
+                    dismiss();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -107,6 +110,7 @@ public class ProfileFragment extends Fragment {
                 mobileNumber.setText("NaN");
                 heroName.setText("NaN");
                 Toast.makeText(getContext(), "Error Fetching data, Try again!", Toast.LENGTH_SHORT).show();
+                dismiss();
             }
         });
         editProfile.setOnClickListener(new View.OnClickListener() {
@@ -164,4 +168,6 @@ public class ProfileFragment extends Fragment {
     {
         progressDialog.dismiss();
     }
+
+
 }
