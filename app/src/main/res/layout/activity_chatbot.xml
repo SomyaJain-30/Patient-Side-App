@@ -57,7 +57,7 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,13 +68,17 @@
 
         <EditText
             android:id="@+id/getMessage"
-            android:layout_width="245dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/messagebackground"
+            android:layout_centerVertical="true"
             android:hint="Tap to speak"
             android:imeOptions="actionDone"
             android:paddingLeft="20dp"
+            android:layout_marginStart="15dp"
             android:paddingRight="10dp"
+            android:paddingVertical="10dp"
             android:textColor="@color/black"
             android:textColorHint="#a8a7a7" />
 
@@ -82,7 +86,9 @@
             android:id="@+id/cardViewOfSpecificUserforListenButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_toRightOf="@id/getMessage"
             android:backgroundTint="@color/lightblue"
             app:cardCornerRadius="50dp">
@@ -105,6 +111,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginVertical="2dp"
             android:layout_toRightOf="@id/cardViewOfSpecificUserforListenButton"
             android:backgroundTint="@color/lightblue"
             app:cardCornerRadius="50dp">
@@ -122,7 +131,7 @@
                 app:tint="@color/white" />
         </androidx.cardview.widget.CardView>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </RelativeLayout>

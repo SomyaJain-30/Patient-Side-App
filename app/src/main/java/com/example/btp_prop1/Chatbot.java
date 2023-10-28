@@ -2,6 +2,7 @@ package com.example.btp_prop1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -20,6 +22,7 @@ import android.speech.SpeechRecognizer;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,9 +32,13 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import kotlin.Suppress;
 
@@ -41,23 +48,52 @@ public class Chatbot extends AppCompatActivity {
     EditText getMsg;
     ImageButton backButton;
     ImageButton sndMsg;
+    CardView cv, recCv;
     String senderUid;
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
-    RecyclerView chatRecycleView;
-    List<MessageModel> messageModelList;
-    MessageAdapter messageAdapter;
+    static RecyclerView chatRecycleView;
+    static List<MessageModel> messageModelList;
+    static MessageAdapter messageAdapter;
     private SpeechRecognizer speechRecognizer;
+    List<String> Intents;
+    Map<String, List<String>> Parameters;
+    Map<String, Boolean> asked;
+    Map<String, Double> intentConfidenceMap;
+    DialogFlowService dialogFlowService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbot);
 
+        Intents = new ArrayList<>();
+        Parameters = new HashMap<>();
+        intentConfidenceMap = new HashMap<>();
+        String[] parameters = {
+                "Physical", "Emotional", "Crisis", "Developmental", "Addiction", "Interpersonal",
+                "Intrapsychic", "Conduct", "Psychosocial", "Adjusment", "Behavioral"
+        };
+
+        asked = new HashMap<>();
+
+        for (String key : parameters) {
+            asked.put(key, false);
+            Parameters.put(key,new ArrayList<>());
+        }
+        dialogFlowService = new DialogFlowService(this);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy gfgPolicy =
+                    new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(gfgPolicy);
+        }
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         rec = findViewById(R.id.buttonForrecordingVoice);
         getMsg = findViewById(R.id.getMessage);
+        cv = findViewById(R.id.cardViewOfSpecificUserforSendButton);
+        recCv = findViewById(R.id.cardViewOfSpecificUserforListenButton);
         backButton = findViewById(R.id.backButtonofchatbot);
         sndMsg = findViewById(R.id.buttonsendMessage);
         senderUid = firebaseAuth.getUid();
@@ -68,7 +104,7 @@ public class Chatbot extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
 
         chatRecycleView.setLayoutManager(linearLayoutManager);
-        MessageAdapter messageAdapter = new MessageAdapter(Chatbot.this, messageModelList);
+        messageAdapter = new MessageAdapter(Chatbot.this, messageModelList);
         chatRecycleView.setAdapter(messageAdapter);
 
         getMsg.setOnKeyListener((v, keyCode, event) -> {
@@ -81,6 +117,7 @@ public class Chatbot extends AppCompatActivity {
         });
 
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        final boolean[] listening = {false};
         speechRecognizer.setRecognitionListener(new RecognitionListener() {
             @Override
             public void onReadyForSpeech(Bundle bundle) {
@@ -114,15 +151,34 @@ public class Chatbot extends AppCompatActivity {
 
             @Override
             public void onResults(Bundle bundle) {
+//                ArrayList<String> matches = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+//                String text = matches.get(0);
+//                System.out.println(text);
+//                getMsg.setText(getMsg.getText().toString() + text);
                 ArrayList<String> matches = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                String text = matches.get(0);
-                System.out.println(text);
-                getMsg.setText(text);
+                if (matches != null && matches.size() > 0) {
+                    // Display the recognized text in the EditText in real-time
+                    String partialResult = matches.get(0);
+                    getMsg.append(partialResult + " ");
+                }
+
+                if (listening[0]) {
+                    speechRecognizer.startListening(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH));
+                }
             }
 
             @Override
             public void onPartialResults(Bundle bundle) {
+                ArrayList<String> matches = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                if (matches != null && matches.size() > 0) {
+                    // Display the recognized text in the EditText in real-time
+                    String partialResult = matches.get(0);
+                    getMsg.append(partialResult + " ");
+                }
 
+                if (listening[0]) {
+                    speechRecognizer.startListening(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH));
+                }
             }
 
             @Override
@@ -147,26 +203,80 @@ public class Chatbot extends AppCompatActivity {
             }
         }
 
-        rec.setOnTouchListener(new View.OnTouchListener() {
+//        rec.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+//                    // Start recording when the button is pressed
+//                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+//                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+//                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+//                    Toast.makeText(Chatbot.this, "Speak", Toast.LENGTH_SHORT).show();
+//                    speechRecognizer.startListening(intent);
+//                    return true;
+//                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+//                    // Stop recording when the button is released
+//                    Toast.makeText(Chatbot.this, "Stop", Toast.LENGTH_SHORT).show();
+//                    speechRecognizer.stopListening();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+
+        rec.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    // Start recording when the button is pressed
+            public void onClick(View view) {
+                if(!listening[0])
+                {
+                    listening[0] = true;
+                    //cv.setVisibility(View.INVISIBLE);
+                    rec.setImageResource(R.drawable.baseline_stop_24);
                     Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                     intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
                     intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
                     Toast.makeText(Chatbot.this, "Speak", Toast.LENGTH_SHORT).show();
                     speechRecognizer.startListening(intent);
-                    return true;
-                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    // Stop recording when the button is released
+
+                    cv.animate()
+                            .translationX(1000) // Move it back to its original position
+                            .setDuration(500)
+                            .withEndAction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    cv.setVisibility(View.GONE);
+                                }
+                            })
+                            .start();
+                }
+                else
+                {
+                    listening[0] = false;
+                    cv.setVisibility(View.VISIBLE);
+                    rec.setImageResource(R.drawable.baseline_mic_24);
                     Toast.makeText(Chatbot.this, "Stop", Toast.LENGTH_SHORT).show();
                     speechRecognizer.stopListening();
-                    return true;
+                    cv.animate()
+                            .translationX(0) // Move it back to its original position
+                            .setDuration(500)
+                            .start();
                 }
-                return false;
             }
         });
+
+        MessageModel botResponse = new MessageModel("", "bot");
+        messageModelList.add(botResponse);
+        messageAdapter.notifyDataSetChanged();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    dialogFlowService.sendRequest("Hi");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, 100);
 
         sndMsg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,18 +293,17 @@ public class Chatbot extends AppCompatActivity {
                 messageAdapter.notifyDataSetChanged();
                 int pos = messageAdapter.getItemCount() - 1;
                 chatRecycleView.scrollToPosition(pos);
-                System.out.println(botResponse);
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        // Add the chatbot's response message
-                        MessageModel botResponse = new MessageModel("I am chatbot", "bot");
-                        messageModelList.set(pos,botResponse);
-                        messageAdapter.notifyDataSetChanged();
-                        // Scroll to the last position after adding the chatbot's message
-                        chatRecycleView.scrollToPosition(messageAdapter.getItemCount() - 1);
+                        try {
+                            dialogFlowService.sendRequest(message);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-                }, 2000);
+                }, 1000);
 
             }
         });
@@ -221,7 +330,46 @@ public class Chatbot extends AppCompatActivity {
         }
     }
 
+//    public void setUpDialogflow()
+//    {
+//        String session;
+//        SessionsClient sessionsClient = null;
+//        try {
+//            InputStream keyFileInputStream = getResources().openRawResource(R.raw.chatbot);
+//            GoogleCredentials credentials = GoogleCredentials.fromStream(keyFileInputStream);
+//            String projectid = ((ServiceAccountCredentials)credentials).getProjectId();
+//            System.out.println(keyFileInputStream);
+//
+//            SessionsSettings.Builder sessionsSettingsBuilder = SessionsSettings.newBuilder();
+//            sessionsSettingsBuilder.setCredentialsProvider(FixedCredentialsProvider.create(credentials));
+//
+//            SessionsSettings sessionsSettings = sessionsSettingsBuilder.build();
+//
+//            System.out.println(sessionsSettings);
+//
+//            sessionsClient = SessionsClient.create(sessionsSettings);
+//            System.out.println(sessionsClient);
+//            String sessionId = "1234";
+//            //session = SessionName.of(projectid,sessionId).toString();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    void sendAndReceiveMessage(String text, String session, SessionsClient sessionsClient) throws IOException {
 
-
+//        TextInput.Builder textInput = TextInput.newBuilder().setText(text).setLanguageCode("en-US");
+//        QueryInput queryInput = QueryInput.newBuilder().setText(textInput).build();
+//
+//        DetectIntentRequest detectIntentRequest = DetectIntentRequest.newBuilder()
+//                .setSession(session)
+//                .setQueryInput(queryInput)
+//                .build();
+//
+//        DetectIntentResponse response = sessionsClient.detectIntent(detectIntentRequest);
+//        QueryResult queryResult = response.getQueryResult();
+//
+//        whatResponse(text, session, sessionsClient, queryResult);
+    //}
 
 }

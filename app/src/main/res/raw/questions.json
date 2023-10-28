@@ -1,0 +1,175 @@
+{
+  "Depression": {
+    "Physical Symptoms": [
+      "For instance, have you noticed changes in your appetite, like eating more or less than usual?",
+      "Have there been times when you had unexplained aches or pains while feeling down?",
+      "Can you recall feeling extremely tired or physically drained after a difficult day?"
+    ],
+    "Triggers": [
+      "Can you think of a recent situation that seemed to trigger your depressive episode, like a work deadline or an argument?",
+      "Are there specific people in your life whose actions or words make you feel more depressed, such as a critical friend or family member?",
+      "Have you experienced stressors like financial problems or relationship issues that contribute to your depression?"
+    ],
+    "Emotional Changes": [
+      "For example, can you describe a recent time when you felt overwhelmingly sad, hopeless, or numb, like when a relationship ended or a job was lost?",
+      "Have you ever experienced intense guilt or feelings of worthlessness after making a mistake or facing a setback?",
+      "Think about a hobby or activity you used to enjoy. Have you lost interest in it recently?"
+    ],
+    "Behavioral Changes": [
+      "Have you noticed changes in your daily routines, like struggling to get out of bed or avoiding social activities after a loss or a difficult experience?",
+      "Can you recall a situation where it was particularly challenging to concentrate or make decisions, like at work or in your personal life?",
+      "Have you ever had thoughts of self-harm or suicide during a period of extreme stress or emotional pain?"
+    ],
+    "Addiction Check": [
+      "Do you use substances like alcohol or drugs as a way to cope with your depression, perhaps after a rough day or following a personal loss?",
+      "Do you find yourself relying on substances more frequently when you're feeling down, such as having a drink when you're feeling really low?"
+    ]
+  },
+  "Anxiousness": {
+    "Physical Symptoms": [
+      "Have you ever experienced a situation where your heart raced, and you felt sweaty and jittery, like before an important presentation or exam?",
+      "Are there times when you feel on edge or restless, like when you're about to meet new people or confront a fear?",
+      "Can you think of a recent event where you had stomachaches or felt nauseous because of anxiety, such as a job interview or a social gathering?"
+    ],
+    "Triggers": [
+      "Think about situations that make you anxious, like crowded places or public speaking. Can you describe how these situations affect you?",
+      "Are there specific fears or phobias that cause heightened anxiety for you, like flying or heights?",
+      "How does your anxiety manifest in social situations, such as when you have to attend a social event or give a presentation?"
+    ],
+    "Emotional Changes": [
+      "Can you recall a time when your anxiety was at its peak, and you felt intense fear, worry, or panic, like when facing a major life change or a health scare?",
+      "Do you have a constant sense of dread or impending disaster, like when anticipating a difficult conversation or a major life decision?",
+      "Think about situations where you became easily irritable or agitated due to anxiety, like during a conflict or stressful deadline."
+    ],
+    "Behavioral Changes": [
+      "Have you ever avoided certain situations or places because of your anxiety, such as social gatherings or public transportation?",
+      "Can you describe a situation where you had difficulty sleeping or experienced intrusive thoughts because of anxiety, like the night before an important event or after a traumatic experience?",
+      "Do you engage in compulsive behaviors, like checking and rechecking things, when you're anxious, such as when you're worried about safety or cleanliness?"
+    ],
+    "Addiction Check": [
+      "Have you used substances like alcohol or drugs to self-medicate and manage your anxiety, such as using them to calm your nerves before a social event?",
+      "Do you find yourself relying on substances more frequently when you're feeling anxious, such as using drugs to cope with performance anxiety or social stress?"
+    ]
+  },
+  "Self Harm": {
+    "Physical Symptoms": [
+      "Have you ever engaged in self-harming behaviors, such as cutting, burning, or hitting yourself, during moments of intense emotional pain or frustration?",
+      "Are there visible physical signs of self-harm on your body, like scars or fresh wounds from recent self-harming episodes?",
+      "Have you ever had infections or injuries due to self-harming activities, like cuts getting infected or injuries requiring medical attention?"
+    ],
+    "Triggers": [
+      "What tends to trigger your self-harming behaviors? Can you describe a recent situation or emotion that led to self-harm, like an argument or overwhelming sadness?",
+      "Are there specific emotions or situations that drive you to self-harm, such as feelings of isolation or extreme stress?",
+      "After self-harming, do you feel a sense of release or relief, like a temporary escape from emotional pain or inner turmoil?"
+    ],
+    "Emotional Changes": [
+      "Before engaging in self-harming behaviors, can you describe the intense emotions you experience, like overwhelming sadness, anger, or emptiness?",
+      "Do you often feel emotional pain or emptiness that drives self-harming behavior, like during periods of loneliness or despair?",
+      "Have you experienced guilt or shame related to self-harm, like feeling regret after self-harming?"
+    ],
+    "Behavioral Changes": [
+      "How often do you engage in self-harming behaviors, like how frequently you cut or harm yourself?",
+      "Can you describe the tools or methods you use for self-harm, such as the objects you use to cut or harm yourself?",
+      "Do you have a specific plan or pattern for self-harming, like a routine you follow during difficult moments?"
+    ],
+    "Addiction Check": [
+      "Do you use substances as part of or after self-harming episodes, like drinking alcohol or using drugs to cope with the emotional aftermath of self-harm?",
+      "Have you noticed an escalation of self-harming behaviors over time, where you engage in self-harm more frequently or with greater severity as a way to cope with emotional pain?"
+    ]
+  },
+  "Substance Abuse": {
+    "Physical Symptoms": [
+      "Have you experienced physical health issues related to substance abuse, like problems with your liver or difficulty breathing due to smoking?",
+      "Have you noticed physical tolerance or withdrawal symptoms, like needing more of a substance to achieve the same effect or experiencing discomfort when you try to quit?",
+      "Is your appearance or personal hygiene deteriorating due to substance use, like neglecting self-care because of addiction?"
+    ],
+    "Triggers": [
+      "Think about situations or emotions that trigger your substance abuse. Can you describe a recent event or stressor that led to substance use, like a breakup or work-related stress?",
+      "Are there specific social settings or peer pressure involved in your substance use, like drinking with friends or using drugs in certain social circles?",
+      "Do you use substances to cope with stress or emotional pain, like turning to alcohol or drugs during challenging times in your life?"
+    ],
+    "Emotional Changes": [
+      "How do you feel emotionally when using substances, like experiencing temporary relief, relaxation, or euphoria?",
+      "Are there emotional ups and downs related to substance use, like feeling elated when using and depressed when coming down from the substance's effects?",
+      "Have you felt guilt, regret, or despair about your substance use, such as regretting the consequences of using drugs or alcohol?"
+    ],
+    "Behavioral Changes": [
+      "Have there been changes in your daily routines, work, or relationships due to substance abuse, like missing work due to hangovers or neglecting family responsibilities because of addiction?",
+      "Do you find it difficult to cut down or control your substance use, like trying and failing to quit or reduce your consumption?",
+      "Are you neglecting responsibilities because of substance abuse, like missing important events or not fulfilling commitments?"
+    ],
+    "Addiction Check": [
+      "Do you feel a strong craving or compulsion to use substances, like an intense urge to use even when you don't want to?",
+      "Have you made unsuccessful attempts to quit or cut down on substance use, such as trying to stop using drugs or alcohol but being unable to?",
+      "Are you spending a significant amount of time obtaining, using, or recovering from the effects of substances, like devoting a lot of time and energy to substance-related activities and rituals?"
+    ]
+  },
+  "Bipolar Disorder": {
+    "Physical Symptoms": [
+      "Have you experienced significant changes in your energy levels, sleep patterns, or appetite, such as periods of intense energy and little need for sleep followed by extended periods of fatigue and increased appetite?",
+      "Are there times when you feel unusually hyperactive and talkative, like speaking rapidly and having racing thoughts during certain phases of your mood?",
+      "Have you gained or lost a significant amount of weight during mood episodes, like losing a lot of weight during manic phases or gaining weight during depressive episodes?"
+    ],
+    "Triggers": [
+      "Are there specific life events or stressors that seem to trigger manic or depressive episodes, such as major life changes, sleep disruptions, or relationship issues?",
+      "How do you feel before and after a manic episode or depressive episode, like experiencing a surge of confidence and euphoria before a manic episode or a deep sense of sadness before a depressive episode?",
+      "Do you have a history of extreme mood swings, like moments of high energy and elation followed by deep lows and hopelessness?"
+    ],
+    "Emotional Changes": [
+      "Describe the emotional highs (euphoria) and lows (depression) you experience during mood swings, like feeling invincible and incredibly happy during manic episodes or deeply sad and lethargic during depressive episodes.",
+      "Are there times when you feel overly confident and impulsive, like taking risks or making impulsive decisions during manic phases?",
+      "Do you experience racing thoughts or irritability during manic episodes, like thoughts racing so quickly that it's hard to focus or becoming easily annoyed with others?"
+    ],
+    "Behavioral Changes": [
+      "Have there been reckless or impulsive behaviors during manic episodes, like overspending, risky sexual behavior, or taking on new, grandiose projects?",
+      "How does your daily routine change during depressive episodes, like struggling to get out of bed, neglecting personal hygiene, or avoiding social interactions?",
+      "Are you experiencing a lack of interest in activities during depressive episodes, like losing all motivation to engage in hobbies or socializing?"
+    ],
+    "Addiction Check": [
+      "Do you use substances like drugs or alcohol to manage your moods during bipolar episodes, such as using them to calm the extreme highs or lows?",
+      "Are there specific patterns of substance use that coincide with mood swings, like drinking heavily during manic phases or using drugs to alleviate depressive symptoms?",
+      "Have you noticed an increase in substance use during manic episodes, such as turning to substances to enhance your already elevated mood or cope with restlessness?"
+    ]
+  },
+  "Default Fallback Intent": {
+    "Physical Symptoms": [
+      "Have you noticed any changes in your body or health recently, like unexplained weight loss, digestive problems, or persistent headaches?",
+      "Can you describe any physical sensations or symptoms you're experiencing, such as muscle tension, fatigue, or trouble sleeping?",
+      "Is there anything related to your physical well-being you want to discuss, like chronic pain or changes in your appetite?"
+    ],
+    "Triggers": [
+      "Are there specific situations or events that have recently affected your emotions or behaviors, such as job-related stress, relationship conflicts, or major life changes?",
+      "Can you identify any triggers in your life that may be contributing to your current feelings or experiences, like the loss of a loved one, financial worries, or social isolation?",
+      "Is there something that has recently had a significant impact on your emotions, like a traumatic event or a significant life transition?"
+    ],
+    "Emotional Changes": [
+      "How have your emotions been lately? Can you describe your feelings, such as feeling anxious, sad, angry, or numb?",
+      "Are there any emotional experiences or changes you'd like to discuss, like feeling overwhelmed, hopeless, or irritable?",
+      "What's been on your mind that might be affecting your emotions, such as persistent worries, intrusive thoughts, or recurring memories?"
+    ],
+    "Behavioral Changes": [
+      "Have you noticed any changes in your daily routines, habits, or actions, like decreased productivity, withdrawal from social activities, or disruptions in your sleep patterns?",
+      "Is there anything in your behavior that you think is different from usual, like changes in eating habits, difficulty concentrating, or a loss of interest in activities?",
+      "What behavioral patterns have you observed in yourself recently, such as social withdrawal or difficulty getting out of bed in the morning?"
+    ],
+    "Addiction Check": [
+      "Do you have any concerns about your use of substances or addictive behaviors, like using drugs, alcohol, or other addictive substances to cope with emotions or stress?",
+      "Is there something related to addiction or substance use that's been on your mind, like concerns about addiction impacting your relationships, work, or overall well-being?",
+      "Can you share your thoughts or feelings about your relationship with substances, such as any cravings, attempts to quit, or difficulties in managing substance use?"
+    ]
+  },
+  "Prompts":
+  {
+    "Elaborate": [
+      "Could you provide more information about that?",
+      "Can you give me more details?",
+      "What else can you share about this?",
+      "I'm not quite following. Could you clarify or elaborate?"
+    ],
+    "Searching": [
+      "I appreciate your input! I'll now begin searching for a suitable psychiatrist or counselor for you.",
+      "Thank you for your answers! I'll start looking for a psychiatrist or counselor who can assist you.",
+      "Thanks for sharing! I'll now initiate the search for a fitting psychiatrist or counselor."
+    ]
+  }
+}
