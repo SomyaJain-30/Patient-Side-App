@@ -55,6 +55,7 @@
             android:id="@+id/input1"
             android:layout_width="40dp"
             android:layout_height="match_parent"
+            android:textColor="@color/black"
             android:layout_marginRight="2dp"
             android:background="@drawable/layout_border"
             android:imeOptions="actionNext"
@@ -69,6 +70,7 @@
         <EditText
             android:id="@+id/input2"
             android:layout_width="40dp"
+            android:textColor="@color/black"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="2dp"
             android:background="@drawable/layout_border"
@@ -84,6 +86,7 @@
         <EditText
             android:id="@+id/input3"
             android:layout_width="40dp"
+            android:textColor="@color/black"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="2dp"
             android:background="@drawable/layout_border"
@@ -99,6 +102,7 @@
         <EditText
             android:id="@+id/input4"
             android:layout_width="40dp"
+            android:textColor="@color/black"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="2dp"
             android:background="@drawable/layout_border"
@@ -113,6 +117,7 @@
 
         <EditText
             android:id="@+id/input5"
+            android:textColor="@color/black"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="2dp"
@@ -130,6 +135,7 @@
         <EditText
             android:id="@+id/input6"
             android:layout_width="40dp"
+            android:textColor="@color/black"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="2dp"
             android:background="@drawable/layout_border"
@@ -180,7 +186,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
+        android:layout_marginHorizontal="20dp"
         android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -193,12 +199,11 @@
             android:id="@+id/otpbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:background="#407CD6"
+            android:background="@drawable/button_background"
             android:text="Verify"
             android:textColor="@color/white"
+            android:textAllCaps="false"
             android:textSize="17dp"
-            app:cornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

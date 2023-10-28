@@ -208,6 +208,7 @@
                 android:layout_centerInParent="true"
                 android:layout_alignParentRight="true"
                 android:text="ft"
+                android:textColor="@color/black"
                 android:textSize="18dp"/>
 
             <EditText
@@ -244,10 +245,11 @@
                 android:id="@+id/kg_edit_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
                 android:text="kg"
-                android:textSize="18dp"/>
+                android:textColor="@color/black"
+                android:textSize="18dp" />
 
             <EditText
                 android:id="@+id/edit_weight"

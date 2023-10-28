@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="#ece5dd"
     tools:context=".ClockFragment"
-
     android:orientation="vertical">
 
     <SearchView
@@ -16,7 +15,8 @@
         android:iconifiedByDefault="false"
         android:queryHint="Search Here"
         android:textColor="@color/black"
-        android:textColorHint="#636161"
+        android:textColorHint="#434242"
+        android:searchHintIcon="@drawable/ic_baseline_search_24"
         android:background="@drawable/search_view_background"
         android:layout_height="wrap_content">
 

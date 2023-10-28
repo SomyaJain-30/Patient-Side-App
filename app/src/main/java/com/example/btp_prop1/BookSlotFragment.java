@@ -194,31 +194,31 @@ public class BookSlotFragment extends BottomSheetDialogFragment {
                     public void onSuccess(DocumentReference documentReference) {
                         String refId = documentReference.getId();
 
-                        firebaseFirestore.collection("Patients").document(firebaseAuth.getCurrentUser().getPhoneNumber())
-                                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        List<String> apids = (List<String>) documentSnapshot.get("Appointments");
-                                        if(apids==null)
-                                            apids = new ArrayList<>();
-                                        apids.add(refId);
-                                        Map<String,Object> tobeupdated = new HashMap<>();
-                                        tobeupdated.put("Appointments", apids);
-                                        firebaseFirestore.collection("Patients").document(firebaseAuth.getCurrentUser().getPhoneNumber())
-                                                .update(tobeupdated);
-
-                                    }
-                                });
+//                        firebaseFirestore.collection("Patients").document(firebaseAuth.getCurrentUser().getPhoneNumber())
+//                                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                                    @Override
+//                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                                        List<String> apids = (List<String>) documentSnapshot.get("Appointments");
+//                                        if(apids==null)
+//                                            apids = new ArrayList<>();
+//                                        apids.add(refId);
+//                                        Map<String,Object> tobeupdated = new HashMap<>();
+//                                        tobeupdated.put("Appointments", apids);
+//                                        firebaseFirestore.collection("Patients").document(firebaseAuth.getCurrentUser().getPhoneNumber())
+//                                                .update(tobeupdated);
+//
+//                                    }
+//                                });
 
                         firebaseFirestore.collection("Doctors").document(Did)
                                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        List<String> apids = (List<String>) documentSnapshot.get("Appointments");
+                                        //List<String> apids = (List<String>) documentSnapshot.get("Appointments");
                                         Map<String,List<String>> bookedSlots = (Map<String, List<String>>) documentSnapshot.get("Booked Slots");
-                                        if(apids==null)
-                                            apids = new ArrayList<>();
-                                        apids.add(refId);
+//                                        if(apids==null)
+//                                            apids = new ArrayList<>();
+//                                        apids.add(refId);
 
                                         if(bookedSlots == null)
                                         {
@@ -230,7 +230,7 @@ public class BookSlotFragment extends BottomSheetDialogFragment {
                                         slotOfDate.add(timeSlotsAdapter.getSelectedTime24());
                                         bookedSlots.put(date, slotOfDate);
                                         Map<String,Object> tobeupdated = new HashMap<>();
-                                        tobeupdated.put("Appointments", apids);
+//                                        tobeupdated.put("Appointments", apids);
                                         tobeupdated.put("Booked Slots", bookedSlots);
                                         firebaseFirestore.collection("Doctors").document(Did)
                                                 .update(tobeupdated);

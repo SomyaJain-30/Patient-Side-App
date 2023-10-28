@@ -46,7 +46,6 @@ public class ClockFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_doctor_list_fragment_clock);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

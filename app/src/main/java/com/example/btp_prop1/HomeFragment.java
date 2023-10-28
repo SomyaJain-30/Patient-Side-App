@@ -15,6 +15,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -22,7 +25,11 @@ import androidx.fragment.app.Fragment;
 
 import android.provider.Settings;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -48,10 +55,11 @@ public class HomeFragment extends Fragment {
 
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 123;
     LocationManager locationManager;
-    TextView loc;
+//    TextView loc;
     ImageView RedirectTochatbot;
     ProgressBar mprogressbar;
     CardView bookapp;
+    Toolbar toolbar;
     boolean val = false;
 
     Geocoder geocoder;
@@ -61,16 +69,30 @@ public class HomeFragment extends Fragment {
     DocumentReference documentReference;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         geocoder = new Geocoder(getContext(), Locale.getDefault());
-        loc = v.findViewById(R.id.loc);
+        //loc = v.findViewById(R.id.loc);
+        toolbar = v.findViewById(R.id.location_fragment_home);
         RedirectTochatbot = v.findViewById(R.id.redirectTochatbot);
         mprogressbar = v.findViewById(R.id.progressBarforLocation);
         bookapp = v.findViewById(R.id.cardView);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         documentReference = firebaseFirestore.collection("Users").document(firebaseAuth.getUid());
+        if (getActivity() != null) {
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.my_location_image);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Location");
+        }
+
 
         //cityName = new StringBuilder();
         locationManager = (LocationManager) requireContext().getSystemService(Context.LOCATION_SERVICE);
@@ -101,7 +123,8 @@ public class HomeFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            loc.setText(cityName.toString());
+//            loc.setText(cityName.toString());
+            toolbar.setTitle(cityName.toString());
             documentReference.update("Location", cityName);
             mprogressbar.setVisibility(View.INVISIBLE);
         }
@@ -154,8 +177,8 @@ public class HomeFragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Object value = document.get("Location");
-                        loc.setText(value.toString());
-                        if (loc.getText().equals("Location") && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){// && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        toolbar.setTitle(value.toString());
+                        if (toolbar.getTitle().equals("Location") && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){// && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             //Toast.makeText(getActivity(), "In Resume location", Toast.LENGTH_SHORT).show();
                             mprogressbar.setVisibility(View.VISIBLE);
                             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
@@ -170,8 +193,25 @@ public class HomeFragment extends Fragment {
             }
         });
         mprogressbar.setVisibility(View.INVISIBLE);
+
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.home_menu,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.logout){
+            firebaseAuth.signOut();
+            Intent i = new Intent(getActivity(),MainActivity.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onStop() {

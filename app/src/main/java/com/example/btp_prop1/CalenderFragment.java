@@ -57,55 +57,45 @@ public class CalenderFragment extends Fragment {
     MyPageAdapter adapter;
     private void fetchAppointments() {
         showProgress();
-        firebaseFirestore.collection("Patients").document(firebaseAuth.getCurrentUser().getPhoneNumber()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        firebaseFirestore.collection("Appointments").whereEqualTo("Cid",firebaseAuth.getCurrentUser().getPhoneNumber()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                ids = (List<String>) documentSnapshot.get("Appointments");
-                if(ids==null){
-                    ids = new ArrayList<>();
-                }
-                firebaseFirestore.collection("Appointments").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for(DocumentSnapshot d : queryDocumentSnapshots){
-                            if(ids.contains(d.getId())){
-                                Appointments appointments = new Appointments();
-                                appointments.setAppointmentId(d.getId());
-                                appointments.setCid(d.get("Cid").toString());
-                                appointments.setDate(d.get("Date").toString());
-                                appointments.setDay(d.get("Day").toString());
-                                appointments.setDid(d.get("Did").toString());
-                                appointments.setStatus(d.get("Status").toString());
-                                appointments.setTimeslot(d.get("TimeSlot").toString());
-                                appointments.setPatientName(documentSnapshot.get("Name").toString());
-                                String status = appointments.getStatus();
-                                switch (status){
-                                    case "Requested":
-                                        System.out.println(status + "requested");
-                                        requested.add(appointments);
-                                        break;
-                                    case "Confirmed":
-                                        System.out.println(status + "confirmed");
-                                        confirmed.add(appointments);
-                                        break;
-                                    case "Completed":
-                                        System.out.println(status + "completed");
-                                        completed.add(appointments);
-                                        break;
-                                    default:
-                                        System.out.println(status + "rejected");
-                                        rejected.add(appointments);
-                                        break;
-                                }
-                            }
-                        }
-                        adapter = new MyPageAdapter(getChildFragmentManager());
-                        viewPager.setAdapter(adapter);
-                        viewPager.setOffscreenPageLimit(4);
-                        tabLayout.setupWithViewPager(viewPager);
-                        progressDialog.dismiss();
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for(DocumentSnapshot d : queryDocumentSnapshots){
+                    Appointments appointments = new Appointments();
+                    appointments.setAppointmentId(d.getId());
+                    appointments.setCid(d.get("Cid").toString());
+                    appointments.setDate(d.get("Date").toString());
+                    appointments.setDay(d.get("Day").toString());
+                    appointments.setDid(d.get("Did").toString());
+                    appointments.setStatus(d.get("Status").toString());
+                    appointments.setTimeslot(d.get("TimeSlot").toString());
+//                  appointments.setPatientName(documentSnapshot.get("Name").toString());
+                    String status = appointments.getStatus();
+                    switch (status){
+                        case "Requested":
+                            System.out.println(status + "requested");
+                            requested.add(appointments);
+                            break;
+                        case "Confirmed":
+                            System.out.println(status + "confirmed");
+                            confirmed.add(appointments);
+                            break;
+                        case "Completed":
+                            System.out.println(status + "completed");
+                            completed.add(appointments);
+                            break;
+                        default:
+                            System.out.println(status + "rejected");
+                            rejected.add(appointments);
+                            break;
                     }
-                });
+
+                }
+                adapter = new MyPageAdapter(getChildFragmentManager());
+                viewPager.setAdapter(adapter);
+                viewPager.setOffscreenPageLimit(4);
+                tabLayout.setupWithViewPager(viewPager);
+                progressDialog.dismiss();
             }
         });
     }

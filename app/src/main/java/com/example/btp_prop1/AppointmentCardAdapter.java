@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -127,6 +128,7 @@ public class AppointmentCardAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             firebaseFirestore.collection("Doctors").document(((Appointments)date_app.get(position)).getDid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    Glide.with(context).load(documentSnapshot.get("Profile URL")).into(((RequestedCardViewHolder) holder).imageView);
                     ((Appointments)date_app.get(position)).setDoctorName(documentSnapshot.get("Name").toString());
                     requestedCardViewHolder.doctorname.setText(((Appointments)date_app.get(position)).getDoctorName());
                     String str = convertTo12HourFormat(((Appointments)date_app.get(position)).getTimeslot());
@@ -180,7 +182,6 @@ public class AppointmentCardAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             public void onClick(View view) {
                 Intent in = new Intent(context, CallActivity.class);
                 in.putExtra("AId", ((Appointments)date_app.get(holder.getAdapterPosition())).getAppointmentId());
-                in.putExtra("PName", ((Appointments)date_app.get(holder.getAdapterPosition())).getPatientName());
                 context.startActivity(in);
                 acceptRejectDialog.dismiss();
             }
@@ -212,11 +213,13 @@ public class AppointmentCardAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private class RequestedCardViewHolder extends RecyclerView.ViewHolder {
         TextView doctorname;
         TextView appointmentTiming;
+        ImageView imageView;
 
         public RequestedCardViewHolder(View view) {
             super(view);
             doctorname  = view.findViewById(R.id.doctor_name_text);
             appointmentTiming = view.findViewById(R.id.date_text);
+            imageView = view.findViewById(R.id.doctor_img);
         }
     }
 

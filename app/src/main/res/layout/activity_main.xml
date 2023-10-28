@@ -25,8 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="62dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:text="Let's get started! Enter Your mobile number"
             android:textColor="#214B7C"
             android:textSize="24dp"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="20dp"
 
             android:orientation="horizontal">
 
@@ -47,6 +47,8 @@
                 android:layout_weight="3"
                 android:background="@drawable/layout_border"
                 android:hint="Mobile number"
+                android:textColorHint="#9C9999"
+                android:textColor="@color/black"
                 android:inputType="number"
                 android:paddingLeft="20dp" />
 
@@ -55,19 +57,20 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp">
 
             <Button
                 android:id="@+id/mainacitvitybutton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#407CD6"
-                android:text="Get otp"
+                android:background="@drawable/button_background"
+                android:text="Get Otp"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
-                app:cornerRadius="10dp"
                 android:gravity="center"
                 tools:ignore="TextContrastCheck,TextContrastCheck" />
 
@@ -79,17 +82,14 @@
                 android:visibility="gone"></ProgressBar>
         </FrameLayout>
 
-
-
-
-
     </LinearLayout>
 
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="390dp"
-        android:layout_height="366dp"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
@@ -106,14 +106,12 @@
         android:text="Video and Audio consult from top doctors at home"
         android:textColor="#214B7C"
         android:textSize="24dp"
-
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.954" />
+        app:layout_constraintVertical_bias="0.916" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

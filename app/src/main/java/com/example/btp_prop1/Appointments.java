@@ -113,11 +113,11 @@ public class Appointments implements Parcelable {
         DoctorName = doctorName;
     }
 
-    public String getPatientName() {
-        return PatientName;
-    }
-
-    public void setPatientName(String patientName) {
-        PatientName = patientName;
-    }
+//    public String getPatientName() {
+//        return PatientName;
+//    }
+//
+//    public void setPatientName(String patientName) {
+//        PatientName = patientName;
+//    }
 }

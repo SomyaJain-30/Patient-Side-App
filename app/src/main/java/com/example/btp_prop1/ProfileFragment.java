@@ -46,7 +46,7 @@ public class ProfileFragment extends Fragment {
     TextView heroName;
     ImageView profile;
     Button editProfile;
-    Uri imgUri;
+    Uri imgUri = Uri.parse("");
 
     RequestOptions requestOptions;
     private FirebaseAuth firebaseAuth;
