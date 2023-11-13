@@ -3,23 +3,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
+    android:paddingVertical="10dp"
+    android:background="@drawable/doctor_item_selected"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:id="@+id/cardview_doctor_list_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        app:cardUseCompatPadding="true"
-        app:cardBackgroundColor="#C1E9FF">
+        app:cardUseCompatPadding="true">
+<!--        app:cardBackgroundColor="#C1E9FF">-->
 
 
         <androidx.cardview.widget.CardView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:id="@+id/cardOfImageView"
+            android:layout_width="50dp"
+            android:elevation="10dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+
             android:layout_margin="10dp"
             app:cardCornerRadius="60dp"
-            app:cardBackgroundColor="@color/white">
+
+            app:cardBackgroundColor="#17918F">
 
             <ImageView
                 android:id="@+id/doctor_image_doctor_list_card"
@@ -33,8 +41,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/cardOfImageView"
             android:layout_gravity="center"
             android:orientation="vertical">
 
@@ -44,19 +54,28 @@
                 android:layout_height="wrap_content"
                 android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="28sp"
-                android:layout_marginBottom="3dp" />
+                android:textSize="18sp"
+                android:layout_marginBottom="0dp" />
             <TextView
                 android:id="@+id/speciality_docto_list_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Speciality"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:layout_marginBottom="0dp"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/language_docto_list_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Languages known"
+                android:textColor="@color/black"
+                android:textSize="12sp"/>
 
         </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
 </LinearLayout>

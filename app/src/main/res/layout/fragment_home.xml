@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
@@ -13,11 +13,8 @@
         android:layout_width="match_parent"
         android:id="@+id/location_fragment_home"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
         android:background="@color/lightblue"
         app:layout_constraintVertical_bias="0.0"
         app:titleTextColor="@color/white">
@@ -59,160 +56,150 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="304dp"
-        android:layout_height="199dp"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="112dp"
-        android:clickable="true"
-        app:cardBackgroundColor="#407CD6"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/location_fragment_home"
+        android:paddingBottom="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/Hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/alata"
+                android:textStyle="bold"
+                android:text="Hello,"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Hello"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/alata"
+                android:textStyle="italic"
+                android:text=""
+                android:textSize="18dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="304dp"
+                android:layout_height="199dp"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginTop="25dp"
+                android:clickable="true"
+                app:cardBackgroundColor="#407CD6"
+                android:layout_below="@+id/name"
+                app:cardCornerRadius="15dp"
+                android:layout_centerHorizontal="true">
 
 
-        <TextView
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="20dp"
-            android:text="Book Appointment with the Doctor"
-            android:textAlignment="viewStart"
-            android:textColor="#FFFFFF"
-            android:textSize="24dp"
-            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Chat your way to top-notch health!"
+                    android:fontFamily="@font/alata"
+                    android:textAlignment="viewStart"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="75dp"
-            android:layout_height="71.48dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="110dp"
-            android:src="@drawable/doctor_image" />
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="71.48dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="110dp"
+                    android:src="@drawable/doctor_image" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            android:layout_marginTop="119dp"
-            android:layout_marginRight="20dp"
-            app:cardBackgroundColor="#E0F9FF"
-            app:cardCornerRadius="60dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="119dp"
+                    android:layout_marginRight="20dp"
+                    app:cardBackgroundColor="#E0F9FF"
+                    app:cardCornerRadius="60dp">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="37.15dp"
-                android:id="@+id/redirectTochatbot"
-                android:layout_gravity="center"
-                android:src="@drawable/arrow"></ImageView>
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="37.15dp"
+                        android:id="@+id/redirectTochatbot"
+                        android:layout_gravity="center"
+                        android:src="@drawable/arrow"></ImageView>
 
 
-        </androidx.cardview.widget.CardView>
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="304dp"
-        android:layout_height="91dp"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="350dp"
-        app:cardBackgroundColor="#96F1FD"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+                </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="17dp"
-            android:layout_marginRight="20dp"
-            app:cardBackgroundColor="#E0F9FF"
-            app:cardCornerRadius="60dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/arrow">
-
-            </ImageView>
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
-        android:layout_width="304dp"
-        android:layout_height="91dp"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="460dp"
-        app:cardBackgroundColor="#65E9FB"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="17dp"
-            android:layout_marginRight="20dp"
-            app:cardBackgroundColor="#E0F9FF"
-            app:cardCornerRadius="60dp">
+            <TextView
+                android:id="@+id/apps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardView"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/bree_serif"
+                android:text="Latest Appointments"
+                android:textStyle="bold"
+                android:textSize="18dp" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/arrow">
+                android:id="@+id/expand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardView"
+                android:layout_alignParentEnd="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/baseline_arrow_right_24" />
 
-            </ImageView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecentApps"
+                android:layout_width="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_below="@id/apps"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
 
-        </androidx.cardview.widget.CardView>
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView4"
-        android:layout_width="304dp"
-        android:layout_height="91dp"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="580dp"
-        app:cardBackgroundColor="#26E5FF"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+            </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:id="@+id/docs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RecentApps"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/bree_serif"
+                android:text="Meet the Expert Ensemble"
+                android:textStyle="bold"
+                android:textSize="18dp" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="17dp"
-            android:layout_marginRight="20dp"
-            app:cardBackgroundColor="#E0F9FF"
-            app:cardCornerRadius="60dp">
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/docs_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_below="@+id/docs"/>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/arrow">
-
-            </ImageView>
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.cardview.widget.CardView>
-
-
-
-
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

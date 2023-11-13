@@ -1,6 +1,10 @@
 package com.example.btp_prop1;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+
+import androidx.navigation.ActivityNavArgsLazyKt;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,13 +36,15 @@ public class DialogFlowService {
     Map<String, Boolean> asked;
     Map<String, Double> intentConfidenceMap;
     Context context;
+    Activity activity;
 
-    public DialogFlowService(Context context)
+    public DialogFlowService(Activity activity, Context context)
     {
         Intents = new ArrayList<>();
         Parameters = new HashMap<>();
         intentConfidenceMap = new HashMap<>();
         client = new OkHttpClient();
+        this.activity = activity;
 
         String[] parameters = {
                 "Physical", "Emotional", "Crisis", "Developmental", "Addiction", "Interpersonal",
@@ -252,6 +258,8 @@ public class DialogFlowService {
     private void conversationEnd(String text) {
         setTextView(text, readJSON("Prompts", "Searching"));
         printMapWithLists(Parameters);
+        ((Chatbot)activity).addIntentsPdf(intentConfidenceMap);
+
     }
 
     public void printMapWithLists(Map<String, List<String>> map) {

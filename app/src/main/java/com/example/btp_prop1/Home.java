@@ -62,9 +62,6 @@ public class Home extends AppCompatActivity {
                     case R.id.navigation_schedule:
                         replaceFragment(new CalenderFragment());
                         return true;
-                    case R.id.navigation_clock:
-                        replaceFragment(new ClockFragment());
-                        return true;
                     case R.id.navigation_profiles:
                         replaceFragment(new ProfileFragment());
                         return true;
@@ -95,7 +92,7 @@ public class Home extends AppCompatActivity {
         }
     };
 
-    private void replaceFragment(Fragment fragment){
+    public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.framelayout,fragment);

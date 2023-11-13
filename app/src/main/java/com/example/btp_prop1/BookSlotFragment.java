@@ -186,7 +186,7 @@ public class BookSlotFragment extends BottomSheetDialogFragment {
                 mp.put("Date", date);
                 mp.put("TimeSlot", timeSlotsAdapter.getSelectedTime24());
                 mp.put("Status", "Requested");
-
+                mp.put("Proforma", RecommendedDoctors.pdfUri);
 
 
                 firebaseFirestore.collection("Appointments").add(mp).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -286,4 +286,6 @@ public class BookSlotFragment extends BottomSheetDialogFragment {
 
         return dateList;
     }
+
+
 }

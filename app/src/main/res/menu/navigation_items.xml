@@ -8,10 +8,6 @@
         android:id="@+id/navigation_schedule"
         android:icon="@drawable/calendar"
         android:title="Appointments" />
-    <item
-        android:id="@+id/navigation_clock"
-        android:icon="@drawable/clock"
-        android:title="Your Journey" />
 
     <item
         android:id="@+id/navigation_profiles"

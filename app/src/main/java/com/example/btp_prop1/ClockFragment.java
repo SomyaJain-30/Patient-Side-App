@@ -102,10 +102,10 @@ public class ClockFragment extends Fragment {
                 for(DocumentSnapshot d: queryDocumentSnapshots)
                 {
                     Doctor doctor = new Doctor(R.drawable.doctor_image, d.get("Name").toString(), d.get("Specialization").toString());
-                    doctor.setAddress(d.get("Clinic Address").toString());
+                    doctor.setClinicAddress(d.get("Clinic Address").toString());
                     doctor.setEducation(d.get("Education").toString());
                     doctor.setContact(d.getId());
-                    doctor.setExperience(Integer.parseInt(d.get("Exprience").toString()));
+                    doctor.setExperience(d.get("Experience").toString());
                     doctor.setEmailAddress(d.get("E-mail address").toString());
                     doctor.setGender(d.get("Gender").toString());
                     doctor.setSlots((Map<String, List<String>>) d.get("Slots"));

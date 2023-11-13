@@ -1,0 +1,59 @@
+[
+  {
+    "about": "A geek individual who loves to solve complex real-world problems and good in problem analytics.",
+    "clinicAddress": "Bhagat Singh Colony",
+    "emailAddress": "somyajain5678@gmail.com",
+    "education": "MSc psychology",
+    "experience": "5",
+    "gender": "Male",
+    "languages": ["Hindi", "English"],
+    "name": "Somya Jain",
+    "profileUrl": "https://firebasestorage.googleapis.com/v0/b/btp-firebase-b15fb.appspot.com/o/Doctors%2F%2B916375906108%2FProfile?alt=media&token=f7ad7785-c859-4116-8ced-2d75e7d09274",
+    "role": "Psychologist",
+    "slots": {
+      "Monday": ["09:00", "14:00"],
+      "Tuesday": ["10:00", "15:00"]
+    },
+    "specialization": ["Depression", "De-Addiction", "Bipolar Disorder", "Self-Harm"],
+    "surveyData": [1, 0, 0, 0, 1, 0, 0, 1, 0, 0],
+    "contact": "+91 XXXXXXXXXX"
+  },
+  {
+    "about": "Passionate about helping people overcome mental health challenges. his code will make the text within the underlinedTextView underlined. You can customize the text and text color in the XML layout and apply the underline effect programmatically in your Java code.",
+    "clinicAddress": "Oak Street Clinic",
+    "emailAddress": "drsmith@example.com",
+    "education": "Ph.D. in Clinical Psychology",
+    "experience": "10",
+    "gender": "Female",
+    "languages": ["English", "Spanish"],
+    "name": "Dr. Smith",
+    "profileUrl": "https://example.com/profiles/drsmith",
+    "role": "Clinical Psychologist",
+    "slots": {
+      "Wednesday": ["11:00", "16:00"],
+      "Friday": ["10:30", "15:30"]
+    },
+    "specialization": ["Anxiety", "Stress Management", "Relationship Issues"],
+    "surveyData": [1, 0, 0, 1, 0, 0, 1, 0, 0, 0],
+    "contact": "+91 YYYYYYYYYY"
+  },
+  {
+    "about": "Dedicated to improving the mental well-being of patients.",
+    "clinicAddress": "Palm Grove Clinic",
+    "emailAddress": "drjohn@example.com",
+    "education": "MD in Psychiatry",
+    "experience": "15",
+    "gender": "Male",
+    "languages": ["English", "French"],
+    "name": "Dr. John",
+    "profileUrl": "https://example.com/profiles/drjohn",
+    "role": "Psychiatrist",
+    "slots": {
+      "Thursday": ["10:00", "13:00"],
+      "Saturday": ["14:00", "18:00"]
+    },
+    "specialization": ["Schizophrenia", "Bipolar Disorder", "Substance Abuse"],
+    "surveyData": [1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
+    "contact": "+91 ZZZZZZZZZZ"
+  }
+]
